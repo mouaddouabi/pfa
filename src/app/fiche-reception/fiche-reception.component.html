@@ -1,0 +1,255 @@
+
+<div class="card" style="width: 100%;">
+    <div class="card-body">
+      <table class="mytable table table-striped example" style="width:100%">
+      <thead>
+        <tr>
+          <th scope="col">Code Fournisseur</th>
+          <th scope="col">Transporteur </th>
+          <th scope="col">N° lot approvisionnement</th>
+          <th scope="col">Region</th>
+          <th scope="col">Variété</th>
+          <th scope="col">Date de récolte</th>
+          <th scope="col">Quantité livrée</th>
+          <th scope="col">Date de livraison</th>
+          <th scope="col"></th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fiche of fichesRec | async">
+          <td>{{fiche.fournisseur.codeFr}}</td>
+          <td>{{fiche.lot.transport.nomTranspt}}</td>
+          <td>{{fiche.lot.numLotAppro}}</td>
+          <td>{{fiche.fournisseur.region}}</td>
+          <td>{{fiche.lot.variete}}</td>
+          <td>{{fiche.lot.dateRecolte}}</td>
+          <td>{{fiche.qteLivree}}</td>
+          <td>{{fiche.lot.dateLivraison}}</td>
+          <td><button (click)="deleteFicheRec(fiche.codeRecep)" class="btn btn-danger">Delete</button>
+            <button (click)="updateFicheRec(fiche.codeRecep)" class="btn btn-info" style="margin-left: 10px">Details</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+  <hr>
+  <div class="card">
+    <div class="card-body">
+    <div class="container">
+      <h4>create Fournisseur</h4>
+      <form (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="selectf">Code Fournisseur</label>
+            <select name="selectmodel" [(ngModel)]="fournisseur" class="custom-select" id="selectf">
+              <option *ngFor="let four of fournisseurs | async" [ngValue]="four">{{four.nom}}</option>
+          </select>
+          </div>
+          <div class="form-group">
+            <label for="codeFr">Code Fournisseur</label>
+            <input type="text" class="form-control" id="codeFr" required [(ngModel)]="ficheRec.fournisseur.codeFr" name="codeFr">
+          </div>
+          <div class="form-group">
+            <label for="Transporteur">Transporteur </label>
+            <input type="text" class="form-control" id="Transporteur" required [(ngModel)]="ficheRec.lot.transport.nomTranspt" name="Transporteur">
+          </div>
+          <div class="form-group">
+            <label for="numLotAppro">N° du lot d’approvisionnement</label>
+            <input type="text" class="form-control" id="numLotAppro" required [(ngModel)]="ficheRec.lot.numLotAppro" name="numLotAppro">
+          </div>
+          
+          <div class="form-group">
+            <label for="Region">Region</label>
+            <input type="text" class="form-control" id="Region" disabled required [(ngModel)]="ficheRec.fournisseur.region" value="{{fournisseur.region}}" name="Region">
+          </div>
+
+          <div class="form-group">
+            <label for="Variété">Variété</label>
+            <input type="text" class="form-control" id="Variété" required [(ngModel)]="ficheRec.lot.variete" name="Variété">
+          </div>
+
+          <div class="form-group">
+            <label for="Date_de_recolte">Date de récolte</label>
+            <input type="date" class="form-control" id="Date_de_recolte" required [(ngModel)]="ficheRec.lot.dateRecolte" name="Date_de_recolte">
+          </div>
+
+          <div class="form-group">
+            <label for="Quantite_livree">Quantité livrée</label>
+            <input type="text" class="form-control" id="Quantite_livree" required [(ngModel)]="ficheRec.qteLivree" name="Quantite_livree">
+          </div>
+          <div class="form-group">
+            <label for="Date_de_livraison">Date de livraison</label>
+            <input type="date" class="form-control" id="Date_de_livraison" required [(ngModel)]="ficheRec.lot.dateLivraison" name="Date_de_livraison">
+          </div>
+          
+          <div class="form-group">
+            <label for="name">Dattes récoltées au sol (traces de terre)</label>
+            <input type="text" class="form-control" id="tracesTerre" required [(ngModel)]="ficheRec.lot.parcelle.tracesTerre" name="tracesTerre">
+          </div>
+          <div class="row">
+            <div class="form-group col-6">
+              <label for="name">Etat de fraîcheur</label>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="Etat_de_fraîcheur" value="Bon" checked [(ngModel)]="ficheRec.lot.etatFraicheur">
+                  Bon
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="Etat_de_fraîcheur" value="moyen"  [(ngModel)]="ficheRec.lot.etatFraicheur">
+                  moyen
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="Etat_de_fraîcheur" value="médiocre "  [(ngModel)]="ficheRec.lot.etatFraicheur">
+                  médiocre 
+                </label>
+              </div>
+            </div>
+            <div class="form-group col-6">
+              <label for="name">Aspect sanitaire</label>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="Aspect_sanitaire" value="Bon" checked [(ngModel)]="ficheRec.lot.aspectSanitaire">
+                  Bon
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="Aspect_sanitaire" value="moyen" [(ngModel)]="ficheRec.lot.aspectSanitaire">
+                  moyen
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="Aspect_sanitaire" value="médiocre " [(ngModel)]="ficheRec.lot.aspectSanitaire">
+                  médiocre 
+                </label>
+              </div>
+            </div>
+          </div>	
+          <table>
+            <tr>
+              <td><label>Stade de maturité</label></td>
+              <td>
+                <div class="form-group" style="margin-top: 12px;">
+                  <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                      <input class="form-check-input mt-1 ml-2" type="radio" name="Stade_de_maturite" value="Vert" [(ngModel)]="ficheRec.lot.maturite">  
+                      Vert
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                      <input class="form-check-input mt-1" type="radio" name="Stade_de_maturite" value="tournante" [(ngModel)]="ficheRec.lot.maturite">  
+                      tournante
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                      <input class="form-check-input mt-1" type="radio" name="Stade_de_maturite" value="mature" [(ngModel)]="ficheRec.lot.maturite">  
+                      mature
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                      <input class="form-check-input mt-1" type="radio" name="Stade_de_maturite" value="sur-maturée" [(ngModel)]="ficheRec.lot.maturite">  
+                      sur-maturée
+                    </label>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>            
+                <label>Fermentation</label>
+              </td>
+              <td>
+                <div class="form-group" style="margin-top: 12px">
+                  <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                      <input class="form-check-input mt-1 ml-2" type="radio" name="Fermentation" value="Oui" [(ngModel)]="ficheRec.lot.fermentation">  
+                      Oui
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                      <input class="form-check-input mt-1" type="radio" name="Fermentation" value="Non" [(ngModel)]="ficheRec.lot.fermentation">  
+                      Non
+                    </label>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>            
+                <label>Corps étrangers</label>
+              </td>
+              <td>
+                <div class="form-group" style="margin-top: 12px;">
+                  <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                      <input class="form-check-input mt-1 ml-2" type="radio" checked="checked" name="Corps_etrangers" onclick="corps_etr(true)" value="true">  
+                      Oui
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                      <input class="form-check-input mt-1" type="radio"  name="Corps_etrangers" onclick="corps_etr(false)" value="false">  
+                      Non
+                    </label>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label>Humidité</label>
+              </td>
+              <td>
+                <div class="form-group" style="margin-top: 12px;">
+                  <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                      <input class="form-check-input mt-1 ml-2" type="radio" name="Humidite" value="Oui" [(ngModel)]="ficheRec.lot.humidite" >  
+                      Oui
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                      <input class="form-check-input mt-1" type="radio" name="Humidite" value="Non" [(ngModel)]="ficheRec.lot.humidite" >  
+                      Non
+                    </label>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </table>
+          <div class="form-group" id="blockCorps">
+            <label for="corps_etrangers">Si corps étrangers, lesquels:</label>
+            <input type="text" class="form-control" id="corps_etrangers" [(ngModel)]="ficheRec.lot.corpsEtrangers" name="corps_etrangers">
+          </div>
+          <div class="form-group">
+            <label for="comments">Appréciation et commentaires</label>
+            <input type="text" class="form-control" id="comments" [(ngModel)]="ficheRec.commentaire" name="comments">
+          </div>
+          <div class="form-group">
+            <label for="humidite_date">Humidité des dattes </label>
+            <input type="text" class="form-control" id="humidite_date" [(ngModel)]="ficheRec.humiditeDattes" name="humidite_date">
+          </div>
+          <div class="form-group">
+            <label for="Responsable_approvisionnement">Responsable d'approvisionnement</label>
+            <input type="text" class="form-control" id="Responsable_approvisionnement" required [(ngModel)]="ficheRec.responsable[0].nom" name="Responsable_approvisionnement">
+          </div>
+          <div class="form-group">
+            <label for="Responsable_qualite">Responsable qualité </label>
+            <input type="text" class="form-control" id="Responsable_qualite" required [(ngModel)]="ficheRec.responsable[1].nom" name="Responsable_qualite">
+          </div>
+          <button *ngIf="isAdd" type="submit" class="btn btn-primary">Submit</button>
+          <button *ngIf="!isAdd" type="submit" class="btn btn-success">Submit</button>
+      </form>
+    </div>
+  </div>
+  </div>

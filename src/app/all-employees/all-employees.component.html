@@ -1,0 +1,51 @@
+
+<div class="card">
+  <div class="card-body">
+    <table class="mytable table table-striped example" style="width:100%">
+    <thead>
+      <tr>
+        <th scope="col">Firstname</th>
+        <th scope="col">Lastname</th>
+        <th scope="col">Email</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employees | async">
+        <td>{{employee.firstName}}</td>
+        <td>{{employee.lastName}}</td>
+        <td>{{employee.email}}</td>
+        <td><button (click)="deleteEmployee(employee.id)" class="btn btn-danger">Delete</button>
+          <button (click)="updateEmployee(employee.id)" class="btn btn-info" style="margin-left: 10px">Details</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+<hr>
+<div class="card">
+  <div class="card-body">
+  <div class="container">
+    <h4>create Employee</h4>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+          <label for="name">First Name</label>
+          <input type="text" class="form-control" id="firstName" required [(ngModel)]="employee.firstName" name="firstName">
+        </div>
+    
+        <div class="form-group">
+          <label for="name">Last Name</label>
+          <input type="text" class="form-control" id="lastName" required [(ngModel)]="employee.lastName" name="lastName">
+        </div>
+    
+        <div class="form-group">
+          <label for="name">Email Id</label>
+          <input type="text" class="form-control" id="emailId" required [(ngModel)]="employee.email" name="emailId">
+        </div>
+        <button *ngIf="isAdd" type="submit" class="btn btn-primary">Submit</button>
+        <button *ngIf="!isAdd" type="submit" class="btn btn-success">Submit</button>
+    </form>
+  </div>
+</div>
+</div>
