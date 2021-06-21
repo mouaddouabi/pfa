@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'update/:id', component: UpdateEmployeeComponent },
   { path: 'fichesRec', component: FicheReceptionComponent },
   { path: 'bonEntrees', component: FicheBonEntreeComponent },
-  { path: '', redirectTo: 'fichesRec', pathMatch: 'full' }
+  { path: '', redirectTo: 'bonEntrees', pathMatch: 'full' }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

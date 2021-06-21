@@ -7,7 +7,7 @@ import { BonEntree } from './bon-entree';
   providedIn: 'root'
 })
 export class BonEntreeService {
-  private url = 'http://localhost:8080/bonentreen';
+  private url = 'http://localhost:8080/bonentree';
   constructor(private http:HttpClient) { }
 
   getBonEntreesList():Observable<any>{

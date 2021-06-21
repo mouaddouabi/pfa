@@ -12,20 +12,21 @@ import { FournisseurService } from '../fournisseur.service';
 export class GestFournisseurComponent implements OnInit {
 
   fournisseurs!: Observable<Fournisseur[]>;
+
   firstname:any;
   id:number=0;
   idUpdate = 0;
   isAdd = true;
+
   public fournisseur:Fournisseur = new Fournisseur();
-  constructor(private fournisseurservice: FournisseurService,private router: Router,private route:ActivatedRoute) {}
+
+  constructor(private fournisseurservice: FournisseurService,private router: Router) {}
     ngOnInit() {
       this.reloadData();
     }
    
     reloadData() {     
-      console.log('avant'+this.fournisseurs);
       this.fournisseurs = this.fournisseurservice.getFournisseurs();
-      console.log(this.fournisseurs);
     }
     deleteFournisseur(id:number){
       this.fournisseurservice.deleteFournisseur(id).subscribe(data =>{ 

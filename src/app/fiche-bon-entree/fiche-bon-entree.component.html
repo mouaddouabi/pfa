@@ -1,0 +1,168 @@
+<div class="card" style="width: 100%;">
+    <div class="card-body">
+      <table class="mytable table table-striped example" style="width:100%">
+      <thead>
+        <tr>
+          <th scope="col">Fournisseur</th>
+          <th scope="col">N° lot approvisionnement</th>
+          <th scope="col">Total</th>
+          <th scope="col">Variété</th>
+          <th scope="col">Maturité des dattes</th>
+          <th scope="col">Etat sanitaire </th>
+          <th scope="col">Decision</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fiche of fichesBonEntree | async">
+          <td>{{fiche.fournisseur.codeFr}}</td>
+          <td>{{fiche.lot.numLotAppro}}</td>
+          <td>{{fiche.total}}</td>
+          <td>{{fiche.lot.variete}}</td>
+          <td>{{fiche.lot.maturite}}</td>
+          <td>{{fiche.lot.aspectSanitaire}}</td>
+          <td>{{fiche.decision}}</td>
+          <td><button (click)="deleteFicheRec(fiche.numBon)" class="btn btn-danger">Delete</button>
+            <button (click)="updateFicheRec(fiche.numBon)" class="btn btn-info" style="margin-left: 10px">Details</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="container">
+        <h4>Create Bon Entree</h4>
+        <form (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="Date">Date</label>
+                <input type="date" class="form-control" id="Date" required [(ngModel)]="bonEntree.date" name="Date">
+              </div>
+            <div class="form-group" *ngIf="isAdd">
+                <label for="selectf">Fournisseur</label>
+                <select name="selectmodel" [(ngModel)]="fournisseur" class="custom-select" id="selectf" (change)="onchange(fournisseur.id)">
+                  <option *ngFor="let four of fournisseurs | async" [ngValue]="four">{{four.nom}}</option>
+              </select>
+            </div>
+            <div class="form-group" *ngIf="!isAdd">
+              <label for="Fournisseur">Fournisseur</label>
+              <input type="text" class="form-control" id="Fournisseur" disabled [(ngModel)]="bonEntree.fournisseur.nom" name="Fournisseur">
+            </div>
+            <div class="form-group">
+                <label for="Region">Region</label>
+                <input type="text" class="form-control" id="Region" disabled required [(ngModel)]="bonEntree.fournisseur.region" value="{{fournisseur.region}}" name="Region">
+            </div>
+            <div class="form-group" *ngIf="isAdd">
+              <label for="selectl">N° du lot d’approvisionnement</label>
+              <select name="selectmodel" [(ngModel)]="lott" class="custom-select" id="selectl" (change)="onchangeL(lott)">
+                <option *ngFor="let lot of lots | async" [ngValue]="lot">{{lot.numLotAppro}}</option>
+            </select>
+            </div>
+            <div class="form-group" *ngIf="!isAdd">
+              <label for="numLotAppro">N° du lot d’approvisionnement</label>
+              <input type="text" class="form-control" id="numLotAppro" disabled [(ngModel)]="bonEntree.lot.numLotAppro" name="numLotAppro">
+            </div>
+            <div class="form-group">
+                <label for="Total">Total</label>
+                <input type="text" class="form-control" id="Region" required [(ngModel)]="bonEntree.total"  name="Total">
+            </div>
+            <div class="form-group">
+                <label for="Variété">Variété</label>
+                <input type="text" class="form-control" id="Variété" required [(ngModel)]="bonEntree.lot.variete" name="Variété">
+              </div>
+              <table>
+                <tr>
+                  <td><label>Stade de maturité</label></td>
+                  <td>
+                    <div class="form-group" style="margin-top: 12px;">
+                      <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                          <input class="form-check-input mt-1 ml-2" type="radio" name="Stade_de_maturite" value="Vert" [(ngModel)]="bonEntree.lot.maturite">  
+                          Vert
+                        </label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                          <input class="form-check-input mt-1" type="radio" name="Stade_de_maturite" value="tournante" [(ngModel)]="bonEntree.lot.maturite">  
+                          tournante
+                        </label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                          <input class="form-check-input mt-1" type="radio" name="Stade_de_maturite" value="mature" [(ngModel)]="bonEntree.lot.maturite">  
+                          mature
+                        </label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                          <input class="form-check-input mt-1" type="radio" name="Stade_de_maturite" value="sur-maturée" [(ngModel)]="bonEntree.lot.maturite">  
+                          sur-maturée
+                        </label>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="Aspect_sanitaire">Aspect sanitaire</label>
+                    </td>
+                    <td>
+                        <div class="form-group" style="margin-top: 12px;">
+                            <div class="form-check form-check-inline">
+                              <label class="form-check-label">
+                                <input type="radio" class="form-check-input mt-1 ml-2" name="Aspect_sanitaire" value="Bon" checked [(ngModel)]="bonEntree.lot.aspectSanitaire">
+                                Bon
+                              </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <label class="form-check-label">
+                                <input type="radio" class="form-check-input mt-1" name="Aspect_sanitaire" value="moyen" [(ngModel)]="bonEntree.lot.aspectSanitaire">
+                                moyen
+                              </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <label class="form-check-label">
+                                <input type="radio" class="form-check-input mt-1" name="Aspect_sanitaire" value="médiocre " [(ngModel)]="bonEntree.lot.aspectSanitaire">
+                                médiocre 
+                              </label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="Decision">Decision</label>
+                    </td>
+                    <td>
+                        <div class="form-group" style="margin-top: 12px;">
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label">
+                                <input type="radio" class="form-check-input mt-1 ml-2" name="Decision" value="Acceptation" [(ngModel)]="bonEntree.decision">
+                                Acceptation
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label">
+                                <input type="radio" class="form-check-input mt-1" name="Decision" value="Rejet" [(ngModel)]="bonEntree.decision">
+                                Rejet 
+                                </label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+              </table>
+            <div class="form-group">
+                <label for="Remarque">Remarque</label>
+                <input type="text" class="form-control" id="Remarque" [(ngModel)]="bonEntree.remarqueBon" name="Remarque">
+            </div>
+            <div class="form-group">
+                <label for="Responsable_approvisionnement">Responsable approvisionnement</label>
+                <input type="text" class="form-control" id="Responsable_approvisionnement" required [(ngModel)]="bonEntree.responsable.nom" name="Responsable_approvisionnement">
+            </div>
+            <button *ngIf="isAdd" type="submit" class="btn btn-primary">Submit</button>
+            <button *ngIf="!isAdd" type="submit" class="btn btn-success">Submit</button>
+        </form>
+        </div>
+    </div>
+</div>

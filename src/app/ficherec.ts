@@ -15,10 +15,8 @@ export class Ficherec {
   constructor(){
     this.fournisseur=new Fournisseur();
     this.lot = new Lot();
-    const respo = new Responsable();
-    const respo2 = new Responsable();
-    respo.fonctionRespo ="Responsable d'approvisionnement";
-    respo2.fonctionRespo="Responsable qualité";
+    const respo = new Responsable("Responsable d'approvisionnement");
+    const respo2 = new Responsable('Responsable qualité');
     this.responsable = new Array(respo,respo2);
   }
 }

@@ -6,7 +6,7 @@ export class BonEntree {
     numBon!:number;
     date!:Date;
     total!:number;
-    decision!:boolean;
+    decision!:string;
     remarqueBon!:string;
     fournisseur!:Fournisseur;
     lot!:Lot;
@@ -14,6 +14,6 @@ export class BonEntree {
     constructor(){
         this.fournisseur = new Fournisseur();
         this.lot= new Lot();
-        this.responsable = new Responsable();
+        this.responsable = new Responsable('responsable approvisionnement');
     }
 }

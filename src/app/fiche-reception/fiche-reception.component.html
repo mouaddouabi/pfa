@@ -41,14 +41,10 @@
       <h4>create Fournisseur</h4>
       <form (ngSubmit)="onSubmit()">
           <div class="form-group">
-            <label for="selectf">Code Fournisseur</label>
+            <label for="selectf">Fournisseur</label>
             <select name="selectmodel" [(ngModel)]="fournisseur" class="custom-select" id="selectf">
               <option *ngFor="let four of fournisseurs | async" [ngValue]="four">{{four.nom}}</option>
           </select>
-          </div>
-          <div class="form-group">
-            <label for="codeFr">Code Fournisseur</label>
-            <input type="text" class="form-control" id="codeFr" required [(ngModel)]="ficheRec.fournisseur.codeFr" name="codeFr">
           </div>
           <div class="form-group">
             <label for="Transporteur">Transporteur </label>
@@ -110,7 +106,7 @@
               </div>
             </div>
             <div class="form-group col-6">
-              <label for="name">Aspect sanitaire</label>
+              <label for="Aspect_sanitaire">Aspect sanitaire</label>
               <div class="form-check">
                 <label class="form-check-label">
                   <input type="radio" class="form-check-input" name="Aspect_sanitaire" value="Bon" checked [(ngModel)]="ficheRec.lot.aspectSanitaire">
