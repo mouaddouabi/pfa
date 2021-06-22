@@ -33,6 +33,7 @@ export class FicheReceptionComponent implements OnInit {
     reloadData() {     
       this.fournisseurs = this.fournisseurService.getFournisseurs();
       this.fichesRec = this.ficherecservice.getFichesRec();
+      this.ficheRec = new Ficherec();
     }
     deleteFicheRec(id:number){
       this.ficherecservice.deleteFicheRec(id).subscribe(data =>{ 

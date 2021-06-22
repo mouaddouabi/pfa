@@ -44,7 +44,7 @@ export class FicheBonEntreeComponent implements OnInit {
     );
   }
   updateFicheRec(id:number){
-    this.idUpdate=id;
+   this.idUpdate=id;
     console.log(id);
     this.bonEntreeService.getBonEntree(id).subscribe(data =>{ 
       console.log(data),

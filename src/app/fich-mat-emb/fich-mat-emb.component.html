@@ -1,0 +1,238 @@
+<div class="card" style="width: 100%;">
+    <div class="card-body">
+      <table class="mytable table table-striped example" style="width:100%">
+      <thead>
+        <tr>
+          <th scope="col">N° Fiche</th>
+          <th scope="col">Date</th>
+          <th scope="col">Responsable</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fiche of fichesTab">
+            <td >{{fiche.codeEmbg}}</td>
+            <td >{{fiche.date}}</td>
+            <td >{{fiche.responsable.nom}}</td>
+            <td >
+                <button (click)="deleteFicheMatEmb(fiche.codeEmbg)" class="btn btn-danger">Delete</button>
+                <button (click)="updateFicheMatEmb(fiche.codeEmbg)" class="btn btn-info" style="margin-left: 10px">Details</button>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+        <div class="container">
+        <h4>Ajouter un Nouveau Fiche d'Emballage</h4>
+        <br>
+        <form (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" class="form-control" id="date" required [(ngModel)]="ficheMatEmb.date" name="date">
+            </div>
+            
+            <div class="container">
+                <label style="font-weight: bold;font-size: large;">Lot n°1</label>
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label for="Fournisseur">Fournisseur</label>
+                        <input type="text" class="form-control" id="Fournisseur" required [(ngModel)]="ficheMatEmb.emballages[0].frEmb" name="Fournisseur">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="CodeFr">Code fournisseur</label>
+                        <input type="text" class="form-control" id="CodeFr" required [(ngModel)]="ficheMatEmb.emballages[0].codeFrEmb" name="CodeFr">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="numLotEmb">N° lot emballage</label>
+                        <input type="text" class="form-control" id="numLotEmb" required [(ngModel)]="ficheMatEmb.emballages[0].numLotEmb" name="numLotEmb">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label for="Volume_unite">Volume unité</label>
+                        <input type="text" class="form-control" id="Volume_unite" required [(ngModel)]="ficheMatEmb.emballages[0].volumeUnite" name="Volume_unite">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="condStock">Conditions de stockage</label>
+                        <input type="text" class="form-control" id="condStock" required [(ngModel)]="ficheMatEmb.emballages[0].condStockage" name="condStock">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="dateCond">Date de conditionnement</label>
+                        <input type="date" class="form-control" id="dateCond" required [(ngModel)]="ficheMatEmb.emballages[0].dateCond" name="dateCond">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label for="Operateur">Opérateur</label>
+                        <input type="text" class="form-control" id="Operateur" required [(ngModel)]="ficheMatEmb.emballages[0].operateur.nom" name="Operateur">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="lavSechEmb">Lavage et séchage des emballages</label>
+                        <input type="text" class="form-control" id="lavSechEmb" required [(ngModel)]="ficheMatEmb.emballages[0].lavageSechageEmb" name="lavageSechageEmb">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="actionCorre">Actions correctives</label>
+                        <input type="text" class="form-control" id="actionCorre" required [(ngModel)]="ficheMatEmb.emballages[0].actionsCor" name="actionCorre">
+                    </div>
+                </div>
+                <input type="button" id="btn1" class="btn btn-primary col-1" onclick="afficherLotsuiv(1)" value="Add" />
+            </div>
+            <br>
+            <div class="container" id="lot1" style="display: none;">
+                <label style="font-weight: bold;font-size: large;">Lot n°2</label>
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label for="Fournisseur1">Fournisseur</label>
+                        <input type="text" class="form-control" id="Fournisseur1"  [(ngModel)]="ficheMatEmb.emballages[1].frEmb" name="Fournisseur">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="CodeFr1">Code fournisseur</label>
+                        <input type="text" class="form-control" id="CodeFr1"  [(ngModel)]="ficheMatEmb.emballages[1].codeFrEmb" name="CodeFr">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="numLotEmb1">N° lot emballage</label>
+                        <input type="text" class="form-control" id="numLotEmb1"  [(ngModel)]="ficheMatEmb.emballages[1].numLotEmb" name="numLotEmb">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label for="Volume_unite1">Volume unité</label>
+                        <input type="text" class="form-control" id="Volume_unite1"  [(ngModel)]="ficheMatEmb.emballages[1].volumeUnite" name="Volume_unite">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="condStock1">Conditions de stockage</label>
+                        <input type="text" class="form-control" id="condStock1"  [(ngModel)]="ficheMatEmb.emballages[1].condStockage" name="condStock">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="dateCond1">Date de conditionnement</label>
+                        <input type="date" class="form-control" id="dateCond1"  [(ngModel)]="ficheMatEmb.emballages[1].dateCond" name="dateCond">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label for="Operateur1">Opérateur</label>
+                        <input type="text" class="form-control" id="Operateur1"  [(ngModel)]="ficheMatEmb.emballages[1].operateur.nom" name="Operateur">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="lavSechEmb1">Lavage et séchage des emballages</label>
+                        <input type="text" class="form-control" id="lavSechEmb1"  [(ngModel)]="ficheMatEmb.emballages[1].lavageSechageEmb" name="lavageSechageEmb">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="actionCorre1">Actions correctives</label>
+                        <input type="text" class="form-control" id="actionCorre1"  [(ngModel)]="ficheMatEmb.emballages[1].actionsCor" name="actionCorre">
+                    </div>
+                </div>
+                <div class="row ml-1">
+                    <input type="button" id="btn2" class="btn btn-primary col-1 " onclick="afficherLotsuiv(2)" value="Add" />
+                    <input type="button" id="btn2h" class="btn btn-primary col-1  ml-1 " onclick="hideLotsuiv(2)" value="Delete" />
+                </div>
+            </div>
+            <br>
+            <div class="container" id="lot2" style="display: none;">
+                <label style="font-weight: bold;font-size: large;">Lot n°3</label>
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label for="Fournisseur2">Fournisseur</label>
+                        <input type="text" class="form-control" id="Fournisseur2"  [(ngModel)]="ficheMatEmb.emballages[2].frEmb" name="Fournisseur">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="CodeFr2">Code fournisseur</label>
+                        <input type="text" class="form-control" id="CodeFr2"  [(ngModel)]="ficheMatEmb.emballages[2].codeFrEmb" name="CodeFr">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="numLotEmb2">N° lot emballage</label>
+                        <input type="text" class="form-control" id="numLotEmb2"  [(ngModel)]="ficheMatEmb.emballages[2].numLotEmb" name="numLotEmb">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label for="Volume_unite2">Volume unité</label>
+                        <input type="text" class="form-control" id="Volume_unite2"  [(ngModel)]="ficheMatEmb.emballages[2].volumeUnite" name="Volume_unite">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="condStock2">Conditions de stockage</label>
+                        <input type="text" class="form-control" id="condStock2"  [(ngModel)]="ficheMatEmb.emballages[2].condStockage" name="condStock">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="dateCond2">Date de conditionnement</label>
+                        <input type="date" class="form-control" id="dateCond2"  [(ngModel)]="ficheMatEmb.emballages[2].dateCond" name="dateCond">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label for="Operateur2">Opérateur</label>
+                        <input type="text" class="form-control" id="Operateur2"  [(ngModel)]="ficheMatEmb.emballages[2].operateur.nom" name="Operateur">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="lavSechEmb2">Lavage et séchage des emballages</label>
+                        <input type="text" class="form-control" id="lavSechEmb2"  [(ngModel)]="ficheMatEmb.emballages[2].lavageSechageEmb" name="lavageSechageEmb">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="actionCorre2">Actions correctives</label>
+                        <input type="text" class="form-control" id="actionCorre2"  [(ngModel)]="ficheMatEmb.emballages[2].actionsCor" name="actionCorre">
+                    </div>
+                </div>
+                <div class="row ml-1">
+                    <input type="button" id="btn3" class="btn btn-primary col-1 " onclick="afficherLotsuiv(3)" value="Add" />
+                    <input type="button" id="btn3h" class="btn btn-primary col-1  ml-1 " onclick="hideLotsuiv(3)" value="Delete" />
+                </div>
+            </div>
+            <div class="container" id="lot3" style="display: none;">
+                <label style="font-weight: bold;font-size: large;">Lot n°4</label>
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label for="Fournisseur3">Fournisseur</label>
+                        <input type="text" class="form-control" id="Fournisseur3"  [(ngModel)]="ficheMatEmb.emballages[3].frEmb" name="Fournisseur">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="CodeFr3">Code fournisseur</label>
+                        <input type="text" class="form-control" id="CodeFr3"  [(ngModel)]="ficheMatEmb.emballages[3].codeFrEmb" name="CodeFr">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="numLotEmb3">N° lot emballage</label>
+                        <input type="text" class="form-control" id="numLotEmb3"  [(ngModel)]="ficheMatEmb.emballages[3].numLotEmb" name="numLotEmb">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label for="Volume_unite3">Volume unité</label>
+                        <input type="text" class="form-control" id="Volume_unite3"  [(ngModel)]="ficheMatEmb.emballages[3].volumeUnite" name="Volume_unite">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="condStock3">Conditions de stockage</label>
+                        <input type="text" class="form-control" id="condStock3"  [(ngModel)]="ficheMatEmb.emballages[3].condStockage" name="condStock">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="dateCond3">Date de conditionnement</label>
+                        <input type="date" class="form-control" id="dateCond3"  [(ngModel)]="ficheMatEmb.emballages[3].dateCond" name="dateCond">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label for="Operateur3">Opérateur</label>
+                        <input type="text" class="form-control" id="Operateur3"  [(ngModel)]="ficheMatEmb.emballages[3].operateur.nom" name="Operateur">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="lavSechEmb3">Lavage et séchage des emballages</label>
+                        <input type="text" class="form-control" id="lavSechEmb3"  [(ngModel)]="ficheMatEmb.emballages[3].lavageSechageEmb" name="lavageSechageEmb">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="actionCorre3">Actions correctives</label>
+                        <input type="text" class="form-control" id="actionCorre3"  [(ngModel)]="ficheMatEmb.emballages[3].actionsCor" name="actionCorre">
+                    </div>
+                </div>
+                <input type="button" id="btn4h" class="btn btn-primary col-1" onclick="hideLotsuiv(4)" value="Delete" />
+            </div>
+            <div class="form-group col-6">
+                <label for="Responsable_qualite">Responsable qualité </label>
+                <input type="text" class="form-control" id="Responsable_qualite" required [(ngModel)]="ficheMatEmb.responsable.nom" name="Responsable_qualite">
+            </div>
+            <button *ngIf="isAdd" type="submit" class="btn btn-primary">Submit</button>
+            <button *ngIf="!isAdd" type="submit" class="btn btn-success">Submit</button>
+        </form>
+        </div>
+      </div>
+  </div>

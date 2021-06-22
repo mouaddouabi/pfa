@@ -10,6 +10,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { GestFournisseurComponent } from './gest-fournisseur/gest-fournisseur.component';
 import { FicheReceptionComponent } from './fiche-reception/fiche-reception.component';
 import { FicheBonEntreeComponent } from './fiche-bon-entree/fiche-bon-entree.component';
+import { FichMatEmbComponent } from './fich-mat-emb/fich-mat-emb.component';
+import { UpdateFichMatEmbComponent } from './update-fich-mat-emb/update-fich-mat-emb.component';
+import { FicheConditionnementComponent } from './fiche-conditionnement/fiche-conditionnement.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +23,9 @@ import { FicheBonEntreeComponent } from './fiche-bon-entree/fiche-bon-entree.com
     GestFournisseurComponent,
     FicheReceptionComponent,
     FicheBonEntreeComponent,
+    FichMatEmbComponent,
+    UpdateFichMatEmbComponent,
+    FicheConditionnementComponent,
   ],
   imports: [
     BrowserModule,

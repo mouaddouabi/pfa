@@ -1,17 +1,25 @@
 import { FicheConditionnement } from "./fiche-conditionnement";
 import { FicheMaterieEmb } from "./fiche-materie-emb";
+import { Operateurs } from "./operateurs";
 
 export class Emballage {
    codeEmb!:number;
-   frEmb!:string;
+   frEmb!:string ;
    codeFrEmb!:number;
    numLotEmb!:number;
    typeEmb!:string;
    volumeUnite!:number;
    condStockage!:string;
    dateCond!:number;
-   lavageSechageEmb!:number;
-   actionsCor!:number;
+   lavageSechageEmb!:string;
+   actionsCor!:string;
    ficheMaterieEmb!:FicheMaterieEmb;
+   operateur!:Operateurs;
    ficheConditionnement!:FicheConditionnement;
+   constructor(){
+      this.codeEmb=0;
+      this.ficheConditionnement = new FicheConditionnement();
+      this.ficheMaterieEmb = new FicheMaterieEmb();
+      this.operateur= new Operateurs();
+   }
 }
