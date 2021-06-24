@@ -20,6 +20,9 @@ export class LotService {
   getLot(id:number):Observable<any>{
     return this.http.get(`${this.url}/${id}`);
   }
+  getLotFumNotCond():Observable<any>{
+    return this.http.get(`${this.url}/fumnotcond`);
+  }
   createLot(lot:Lot):Observable<Object>{
     return this.http.post(`${this.url}`,lot);
   }

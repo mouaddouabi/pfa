@@ -18,7 +18,6 @@ export class Emballage {
    ficheConditionnement!:FicheConditionnement;
    constructor(){
       this.codeEmb=0;
-      this.ficheConditionnement = new FicheConditionnement();
       this.ficheMaterieEmb = new FicheMaterieEmb();
       this.operateur= new Operateurs();
    }

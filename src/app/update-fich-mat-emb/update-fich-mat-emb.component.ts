@@ -16,6 +16,7 @@ export class UpdateFichMatEmbComponent implements OnInit {
   ngOnInit(): void {
     this.id=this.route.snapshot.params['id'];
     this.ficheMatService.getFicheMatEmb(this.id).subscribe(data =>{ 
+      this.ficheMatEmb=new FicheMaterieEmb();
       console.log(data),
       this.ficheMatEmb=data;
     },error => console.log(error));

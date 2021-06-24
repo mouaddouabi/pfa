@@ -36,7 +36,7 @@ export class FichMatEmbComponent implements OnInit {
         }
       );
     }
-    deleteFicheMatEmb(id:number){
+    deleteFicheCond(id:number){
       this.ficheMatService.deleteFicheMatEmb(id).subscribe(data =>{ 
         console.log(data)
         this.router.navigate(['fichesMatEmb']);
@@ -44,7 +44,7 @@ export class FichMatEmbComponent implements OnInit {
       },error => console.log(error)
       );
     }
-    updateFicheMatEmb(id:number){
+    updateFicheCond(id:number){
     /*  this.idUpdate=id;
       console.log(id);
       this.ficheMatService.getFicheMatEmb(id).subscribe(data =>{ 

@@ -26,8 +26,9 @@
           <td>{{fiche.lot.dateRecolte}}</td>
           <td>{{fiche.qteLivree}}</td>
           <td>{{fiche.lot.dateLivraison}}</td>
-          <td><button (click)="deleteFicheRec(fiche.codeRecep)" class="btn btn-danger">Delete</button>
-            <button (click)="updateFicheRec(fiche.codeRecep)" class="btn btn-info" style="margin-left: 10px">Details</button>
+          <td>
+            <button (click)="deleteFicheRec(fiche.codeRecep)" class="btn btn-danger">Delete</button>
+            <button (click)="updateFicheRec(fiche.codeRecep)" class="btn btn-info float-right" style="margin-left: 10px">Details</button>
           </td>
         </tr>
       </tbody>

@@ -1,1 +1,209 @@
-<p>fiche-conditionnement works!</p>
+<div class="card" style="width: 100%;">
+    <div class="card-body">
+      <table class="mytable table table-striped example" style="width:100%">
+      <thead>
+        <tr>
+          <th scope="col">Date de conditionnement</th>
+          <th scope="col">Numéro Lot de production</th>
+          <th scope="col">Numéro du lot d’emballage</th>
+          <th scope="col">Quantité dattes conditionnée</th>
+          <th scope="col">Humidité des dattes conditionnées</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fiche of fichesTab">
+            <td >{{fiche.dateCondi}}</td>
+            <td >{{fiche.lot.codeLotAppro}}</td>
+            <td >{{fiche.emballage.numLotEmb}}</td>
+            <td>{{fiche.qteDateCondi}}</td>
+            <td>{{fiche.humiditeDateCondi}}</td>
+            <td >
+                <button (click)="deleteFicheCond(fiche.codeCondi)" class="btn btn-danger">Delete</button>
+                <button (click)="updateFicheCond(fiche.codeCondi)" class="btn btn-info" style="margin-left: 10px">Details</button>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+        <div class="container">
+        <h4>Ajouter un Nouveau Fiche d'Emballage</h4>
+        <br>
+        <form (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="date">Date de conditionnement</label>
+                <input type="date" class="form-control" id="date" required [(ngModel)]="ficheCond.dateCondi" name="date">
+            </div>
+            <div class="row">
+                <div class="form-group col-6">
+                    <label for="selectf">Numéro Lot de production</label>
+                    <select name="selectmodel" [(ngModel)]="ficheCond.lot" class="custom-select" id="selectf">
+                      <option *ngFor="let four of lots" [ngValue]="four">{{four.codeLotAppro}}</option>
+                  </select>
+                </div>
+                <div class="form-group col-6">
+                    <label for="selectf1">Numéro du lot d’emballage</label>
+                    <select name="selectmodel" [(ngModel)]="ficheCond.emballage" class="custom-select" id="selectf1">
+                      <option *ngFor="let emb of emballages" [ngValue]="emb">{{emb.numLotEmb}}</option>
+                  </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-6">
+                    <label for="quCond">Quantité dattes conditionnée</label>
+                    <input type="number" class="form-control" id="quCond" required [(ngModel)]="ficheCond.qteDateCondi" name="quCond">
+                </div>
+                <div class="form-group col-6">
+                    <label for="humiditeDateCondi">Humidité des dattes conditionnée</label>
+                    <input type="number" class="form-control" id="humiditeDateCondi" required [(ngModel)]="ficheCond.humiditeDateCondi" name="humiditeDateCondi">
+                </div>
+            </div>
+            <div class="container">
+                <label style="font-weight: bold;font-size: large;">Unité n°1</label>
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label for="numSerieUnitesInit">Numéro de série des unités initiales</label>
+                        <input type="text" class="form-control" id="numSerieUnitesInit" required [(ngModel)]="ficheCond.unites[0].numSerieUnitesInit" name="numSerieUnitesInit">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="volumeUnite">Volume unité</label>
+                        <input type="text" class="form-control" id="volumeUnite" required [(ngModel)]="ficheCond.unites[0].volumeUnite" name="volumeUnite">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="nbreUnitesCondi">Nombre d’unités conditionnées</label>
+                        <input type="text" class="form-control" id="nbreUnitesCondi" required [(ngModel)]="ficheCond.unites[0].nbreUnitesCondi" name="nbreUnitesCondi">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label for="numColis">Numéro de colis</label>
+                        <input type="text" class="form-control" id="numColis" required [(ngModel)]="ficheCond.unites[0].numColis" name="numColis">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="nbreBraquettesParColis">Nombre de barquettes par colis</label>
+                        <input type="text" class="form-control" id="nbreBraquettesParColis" required [(ngModel)]="ficheCond.unites[0].nbreBraquettesParColis" name="nbreBraquettesParColis">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="nbreColis">Nombre de colis</label>
+                        <input type="text" class="form-control" id="nbreColis" required [(ngModel)]="ficheCond.unites[0].nbreColis" name="nbreColis">
+                    </div>
+                </div>
+                <input type="button" id="btn1" class="btn btn-primary col-1" onclick="afficherLotsuiv(1)" value="Add" />
+            </div>
+            <div class="container" id="lot1" style="display: none;">
+                <label style="font-weight: bold;font-size: large;">Unité n°2</label>
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label for="numSerieUnitesInit1">Numéro de série des unités initiales</label>
+                        <input type="text" class="form-control" id="numSerieUnitesInit1" required [(ngModel)]="ficheCond.unites[1].numSerieUnitesInit" name="numSerieUnitesInit1">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="volumeUnite1">Volume unité</label>
+                        <input type="text" class="form-control" id="volumeUnite1" required [(ngModel)]="ficheCond.unites[1].volumeUnite" name="volumeUnite1">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="nbreUnitesCondi1">Nombre d’unités conditionnées</label>
+                        <input type="text" class="form-control" id="nbreUnitesCondi1" required [(ngModel)]="ficheCond.unites[1].nbreUnitesCondi" name="nbreUnitesCondi1">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label for="numColis1">Numéro de colis</label>
+                        <input type="text" class="form-control" id="numColis1" required [(ngModel)]="ficheCond.unites[1].numColis" name="numColis1">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="nbreBraquettesParColis1">Nombre de barquettes par colis</label>
+                        <input type="text" class="form-control" id="nbreBraquettesParColis1" required [(ngModel)]="ficheCond.unites[1].nbreBraquettesParColis" name="nbreBraquettesParColis1">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="nbreColis1">Nombre de colis</label>
+                        <input type="text" class="form-control" id="nbreColis1" required [(ngModel)]="ficheCond.unites[1].nbreColis" name="nbreColis1">
+                    </div>
+                </div>
+                <div class="row ml-1">
+                    <input type="button" id="btn2" class="btn btn-primary col-1 " onclick="afficherLotsuiv(2)" value="Add" />
+                    <input type="button" id="btn2h" class="btn btn-primary col-1  ml-1 " onclick="hideLotsuiv(2)" value="Delete" />
+                </div>
+            </div>
+            <div class="container" id="lot2" style="display: none;">
+                <label style="font-weight: bold;font-size: large;">Unité n°3</label>
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label for="numSerieUnitesInit2">Numéro de série des unités initiales</label>
+                        <input type="text" class="form-control" id="numSerieUnitesInit2" required [(ngModel)]="ficheCond.unites[2].numSerieUnitesInit" name="numSerieUnitesInit2">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="volumeUnite2">Volume unité</label>
+                        <input type="text" class="form-control" id="volumeUnite2" required [(ngModel)]="ficheCond.unites[2].volumeUnite" name="volumeUnite2">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="nbreUnitesCondi2">Nombre d’unités conditionnées</label>
+                        <input type="text" class="form-control" id="nbreUnitesCondi2" required [(ngModel)]="ficheCond.unites[2].nbreUnitesCondi" name="nbreUnitesCondi2">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label for="numColis2">Numéro de colis</label>
+                        <input type="text" class="form-control" id="numColis2" required [(ngModel)]="ficheCond.unites[2].numColis" name="numColis2">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="nbreBraquettesParColis2">Nombre de barquettes par colis</label>
+                        <input type="text" class="form-control" id="nbreBraquettesParColis2" required [(ngModel)]="ficheCond.unites[2].nbreBraquettesParColis" name="nbreBraquettesParColis2">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="nbreColis2">Nombre de colis</label>
+                        <input type="text" class="form-control" id="nbreColis2" required [(ngModel)]="ficheCond.unites[2].nbreColis" name="nbreColis2">
+                    </div>
+                </div>
+                <div class="row ml-1">
+                    <input type="button" id="btn3" class="btn btn-primary col-1 " onclick="afficherLotsuiv(3)" value="Add" />
+                    <input type="button" id="btn3h" class="btn btn-primary col-1  ml-1 " onclick="hideLotsuiv(3)" value="Delete" />
+                </div>
+            </div>
+            <br>
+            <div class="container" id="lot3" style="display: none;">
+                <label style="font-weight: bold;font-size: large;">Unité n°4</label>
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label for="numSerieUnitesInit3">Numéro de série des unités initiales</label>
+                        <input type="text" class="form-control" id="numSerieUnitesInit3" required [(ngModel)]="ficheCond.unites[3].numSerieUnitesInit" name="numSerieUnitesInit3">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="volumeUnite4">Volume unité</label>
+                        <input type="text" class="form-control" id="volumeUnite3" required [(ngModel)]="ficheCond.unites[3].volumeUnite" name="volumeUnite3">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="nbreUnitesCondi3">Nombre d’unités conditionnées</label>
+                        <input type="text" class="form-control" id="nbreUnitesCondi3" required [(ngModel)]="ficheCond.unites[3].nbreUnitesCondi" name="nbreUnitesCondi3">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label for="numColis3">Numéro de colis</label>
+                        <input type="text" class="form-control" id="numColis3" required [(ngModel)]="ficheCond.unites[3].numColis" name="numColis3">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="nbreBraquettesParColis3">Nombre de barquettes par colis</label>
+                        <input type="text" class="form-control" id="nbreBraquettesParColis3" required [(ngModel)]="ficheCond.unites[3].nbreBraquettesParColis" name="nbreBraquettesParColis3">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="nbreColis3">Nombre de colis</label>
+                        <input type="text" class="form-control" id="nbreColis3" required [(ngModel)]="ficheCond.unites[3].nbreColis" name="nbreColis3">
+                    </div>
+                </div>
+                <input type="button" id="btn4h" class="btn btn-primary col-1" onclick="hideLotsuiv(4)" value="Delete" />
+            </div>
+            <br>
+            <div class="form-group col-6">
+                <label for="Responsable_qualite">Responsable qualité </label>
+                <input type="text" class="form-control" id="Responsable_qualite" required [(ngModel)]="ficheCond.responsable.nom" name="Responsable_qualite">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        </div>
+      </div>
+  </div>
+  

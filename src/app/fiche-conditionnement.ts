@@ -7,10 +7,15 @@ export class FicheConditionnement {
     codeCondi!:number;
     dateCondi!:Date;
     qteDateCondi!:number;
-    humiditeDateCondi!:number;
+    humiditeDateCondi!:string;
     responsable!:Responsable ;
     lot!:Lot;
     unites!:Unites[];
     emballage!:Emballage;
-
+    constructor(){
+        this.lot= new Lot();
+        this.emballage = new Emballage();
+        this.unites = new Array<Unites>(4);
+        this.responsable = new Responsable("responsable qualité ");
+    }
 }
