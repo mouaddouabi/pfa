@@ -6,7 +6,7 @@ export class Responsable {
     adresse: string = "";
     codeRespo!:number;
     fonctionRespo!:string;
-    constructor(f:string){
-        this.fonctionRespo=f;
+    constructor(){
     }
+    
 }

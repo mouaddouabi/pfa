@@ -13,6 +13,8 @@ import { FicheBonEntreeComponent } from './fiche-bon-entree/fiche-bon-entree.com
 import { FichMatEmbComponent } from './fich-mat-emb/fich-mat-emb.component';
 import { UpdateFichMatEmbComponent } from './update-fich-mat-emb/update-fich-mat-emb.component';
 import { FicheConditionnementComponent } from './fiche-conditionnement/fiche-conditionnement.component';
+import { GestionFermeComponent } from './gestion-ferme/gestion-ferme.component';
+import { GestionResponsableComponent } from './gestion-responsable/gestion-responsable.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +28,8 @@ import { FicheConditionnementComponent } from './fiche-conditionnement/fiche-con
     FichMatEmbComponent,
     UpdateFichMatEmbComponent,
     FicheConditionnementComponent,
+    GestionFermeComponent,
+    GestionResponsableComponent,
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,6 @@ export class FicheMaterieEmb {
     responsable!:Responsable;
     constructor(){
         this.emballages = new Array<Emballage>(4);
-        this.responsable=new Responsable("Responsable qualité");
+        this.responsable=new Responsable();
     }
 }

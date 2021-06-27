@@ -46,6 +46,9 @@ export class GestFournisseurComponent implements OnInit {
       },error => console.log(error));
       this.isAdd=false;
     }
+    AddFerme(id:number){
+      this.router.navigate(['addFerme',id])
+    }
     onSubmit(){
       console.log(this.isAdd)
       if(this.isAdd){
@@ -68,4 +71,5 @@ export class GestFournisseurComponent implements OnInit {
         this.idUpdate=0;
       }
     }
+    
 }

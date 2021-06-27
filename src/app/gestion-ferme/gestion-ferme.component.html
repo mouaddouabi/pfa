@@ -1,0 +1,43 @@
+
+<p style="font-weight: bold;">Mr. {{fournisseur.nom}} {{fournisseur.prenom}}</p>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Liste des Fermes</h5>
+        <br>
+        <table class="mytable table table-striped example" style="width:100%">
+            <thead>
+                <tr>
+                    <th class="col-4" scope="col">Code Ferme</th>
+                    <th class="col-4" scope="col">Region</th>
+                    <th  class="col-4" scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let ferme of fournisseur.ferme">
+                    <td>{{ferme.codeFerme}}</td>
+                    <td>{{ferme.region}}</td>
+                    <td>
+                        <button (click)="deleteFerme(ferme.codeFerme)" class="btn btn-danger">Delete</button>
+                        <button (click)="updateFerme(ferme.codeFerme)" class="btn btn-info" style="margin-left: 10px">Details</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+  </div>
+  </div>
+  <hr>
+  <div class="card">
+    <div class="card-body">
+    <div class="container">
+      <h4>Ajouter Une Ferme</h4>
+      <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="name">Region</label>
+            <input type="text" class="form-control" id="nom" required [(ngModel)]="ferme.region" name="nom">
+          </div>
+          <button *ngIf="isAdd" type="submit" class="btn btn-primary">Submit</button>
+          <button *ngIf="!isAdd" type="submit" class="btn btn-success">Submit</button>
+      </form>
+    </div>
+  </div>
+  </div>

@@ -16,6 +16,6 @@ export class FicheConditionnement {
         this.lot= new Lot();
         this.emballage = new Emballage();
         this.unites = new Array<Unites>(4);
-        this.responsable = new Responsable("responsable qualité ");
+        this.responsable = new Responsable();
     }
 }

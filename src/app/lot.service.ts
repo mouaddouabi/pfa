@@ -14,8 +14,8 @@ export class LotService {
   getLots():Observable<any>{
     return this.http.get(`${this.url}`);
   }
-  getLotsFR(idfr:number):Observable<any>{
-    return this.http.get(`${this.url}/rec/${idfr}`);
+  getLotsFR():Observable<any>{
+    return this.http.get(`${this.url}/rec`);
   }
   getLot(id:number):Observable<any>{
     return this.http.get(`${this.url}/${id}`);

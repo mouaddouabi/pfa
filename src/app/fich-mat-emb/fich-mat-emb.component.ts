@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { Emballage } from '../emballage';
 import { FicheMaterieEmb } from '../fiche-materie-emb';
 import { FicheMaterieEmbService } from '../fiche-materie-emb.service';
+import { Responsable } from '../responsable';
+import { ResponsableService } from '../responsable.service';
 
 @Component({
   selector: 'app-fich-mat-emb',
@@ -18,7 +20,8 @@ export class FichMatEmbComponent implements OnInit {
   id:number=0;
   idUpdate = 0;
   isAdd = true;
-  constructor(private ficheMatService: FicheMaterieEmbService,private router: Router,private route:ActivatedRoute) {}
+  responsablesqualite!:Responsable[];
+  constructor(private ficheMatService: FicheMaterieEmbService,private router: Router,private route:ActivatedRoute,private responsableService:ResponsableService) {}
     ngOnInit() {
       this.reloadData();
     }
@@ -33,6 +36,12 @@ export class FichMatEmbComponent implements OnInit {
           console.log(data),
           this.fichesMatEmb = data,
           this.fichesTab = data as FicheMaterieEmb[]; 
+        }
+      );
+      this.responsableService.getResponsablesByType("Responsable qualité").subscribe(
+        data =>{
+          this.responsablesqualite = data as Responsable[];
+          console.log(this.responsablesqualite); 
         }
       );
     }
@@ -83,5 +92,11 @@ export class FichMatEmbComponent implements OnInit {
         this.isAdd=true;
         this.idUpdate=0;
       }
+    }
+    deleteEMb(emballage:Emballage[],d:number){
+      this.ficheMatEmb.emballages[d].frEmb = "";
+      console.log(this.ficheMatEmb.emballages);
+      this.router.navigate(['fichesMatEmb']);
+      
     }
 }

@@ -3,19 +3,19 @@
       <table class="mytable table table-striped example" style="width:100%">
       <thead>
         <tr>
-          <th scope="col">Fournisseur</th>
-          <th scope="col">N° lot approvisionnement</th>
-          <th scope="col">Total</th>
-          <th scope="col">Variété</th>
-          <th scope="col">Maturité des dattes</th>
+          <th class="col-2" scope="col">Fournisseur</th>
+          <th class="col-1" scope="col">N° lot approvisionnement</th>
+          <th class="col-1" scope="col">Total</th>
+          <th class="col-2" scope="col">Variété</th>
+          <th class="col-2" scope="col">Maturité des dattes</th>
           <th scope="col">Etat sanitaire </th>
-          <th scope="col">Decision</th>
-          <th scope="col"></th>
+          <th class="col-1" scope="col">Decision</th>
+          <th class="col-2" scope="col"></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let fiche of fichesBonEntree | async">
-          <td>{{fiche.fournisseur.codeFr}}</td>
+          <td>{{fiche.fournisseur.nom}}</td>
           <td>{{fiche.lot.numLotAppro}}</td>
           <td>{{fiche.total}}</td>
           <td>{{fiche.lot.variete}}</td>
@@ -31,46 +31,42 @@
   </div>
 </div>
 <div class="card">
-    <div class="card-body">
-        <div class="container">
-        <h4>Create Bon Entree</h4>
-        <form (ngSubmit)="onSubmit()">
+  <div class="card-body">
+    <div class="container">
+      <h4>Create Bon Entree</h4>
+      <form (ngSubmit)="onSubmit()">
             <div class="form-group">
                 <label for="Date">Date</label>
                 <input type="date" class="form-control" id="Date" required [(ngModel)]="bonEntree.date" name="Date">
-              </div>
+            </div>
             <div class="form-group" *ngIf="isAdd">
+                <label for="selectl">N° du lot d’approvisionnement</label>
+                <select name="selectmodel" [(ngModel)]="bonEntree.lot" class="custom-select" id="selectl" (change)="onchangeLot(bonEntree.lot)">
+                  <option *ngFor="let lot of lots" [ngValue]="lot">{{lot.numLotAppro}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+              <label for="Fournisseur">Fournisseur</label>
+              <input type="text" class="form-control" id="Fournisseur" disabled required [(ngModel)]="bonEntree.fournisseur.nom" value="{{bonEntree.fournisseur.nom | json}}" name="Fournisseur">
+            </div>
+            <!-- <div class="form-group" *ngIf="isAdd">
                 <label for="selectf">Fournisseur</label>
                 <select name="selectmodel" [(ngModel)]="fournisseur" class="custom-select" id="selectf" (change)="onchange(fournisseur.id)">
                   <option *ngFor="let four of fournisseurs | async" [ngValue]="four">{{four.nom}}</option>
               </select>
-            </div>
-            <div class="form-group" *ngIf="!isAdd">
+            </div> -->
+            <!-- <div class="form-group" *ngIf="!isAdd">
               <label for="Fournisseur">Fournisseur</label>
               <input type="text" class="form-control" id="Fournisseur" disabled [(ngModel)]="bonEntree.fournisseur.nom" name="Fournisseur">
-            </div>
-            <div class="form-group">
-                <label for="Region">Region</label>
-                <input type="text" class="form-control" id="Region" disabled required [(ngModel)]="bonEntree.fournisseur.region" value="{{fournisseur.region}}" name="Region">
-            </div>
-            <div class="form-group" *ngIf="isAdd">
-              <label for="selectl">N° du lot d’approvisionnement</label>
-              <select name="selectmodel" [(ngModel)]="lott" class="custom-select" id="selectl" (change)="onchangeL(lott)">
-                <option *ngFor="let lot of lots | async" [ngValue]="lot">{{lot.numLotAppro}}</option>
-            </select>
-            </div>
-            <div class="form-group" *ngIf="!isAdd">
-              <label for="numLotAppro">N° du lot d’approvisionnement</label>
-              <input type="text" class="form-control" id="numLotAppro" disabled [(ngModel)]="bonEntree.lot.numLotAppro" name="numLotAppro">
-            </div>
+            </div> -->
             <div class="form-group">
                 <label for="Total">Total</label>
-                <input type="text" class="form-control" id="Region" required [(ngModel)]="bonEntree.total"  name="Total">
+                <input type="number" class="form-control" disabled id="Region" required [(ngModel)]="bonEntree.total"  name="Total">
             </div>
             <div class="form-group">
-                <label for="Variété">Variété</label>
-                <input type="text" class="form-control" id="Variété" required [(ngModel)]="bonEntree.lot.variete" name="Variété">
-              </div>
+              <label for="Variété">Variété</label>
+              <input type="text" class="form-control" disabled id="Variété" required [(ngModel)]="bonEntree.lot.variete" name="Variété">
+            </div>  
               <table>
                 <tr>
                   <td><label>Stade de maturité</label></td>
@@ -157,12 +153,14 @@
                 <input type="text" class="form-control" id="Remarque" [(ngModel)]="bonEntree.remarqueBon" name="Remarque">
             </div>
             <div class="form-group">
-                <label for="Responsable_approvisionnement">Responsable approvisionnement</label>
-                <input type="text" class="form-control" id="Responsable_approvisionnement" required [(ngModel)]="bonEntree.responsable.nom" name="Responsable_approvisionnement">
+              <label for="Responsable_approvisionnement">Responsable d'approvisionnement <span *ngIf="!isAdd" style="font-weight: bold;">:{{bonEntree.responsable.nom}}</span></label>
+              <select name="Responsable_approvisionnement" [(ngModel)]="bonEntree.responsable" class="custom-select" id="Responsable_approvisionnement">
+                <option *ngFor="let respo of responsablesAppro" [ngValue]="respo">{{respo.nom}}</option>
+              </select>  
             </div>
             <button *ngIf="isAdd" type="submit" class="btn btn-primary">Submit</button>
             <button *ngIf="!isAdd" type="submit" class="btn btn-success">Submit</button>
-        </form>
-        </div>
+      </form>
     </div>
+  </div>
 </div>

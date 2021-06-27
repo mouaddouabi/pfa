@@ -7,6 +7,8 @@ import { FicheBonEntreeComponent } from './fiche-bon-entree/fiche-bon-entree.com
 import { FicheConditionnementComponent } from './fiche-conditionnement/fiche-conditionnement.component';
 import { FicheReceptionComponent } from './fiche-reception/fiche-reception.component';
 import { GestFournisseurComponent } from './gest-fournisseur/gest-fournisseur.component';
+import { GestionFermeComponent } from './gestion-ferme/gestion-ferme.component';
+import { GestionResponsableComponent } from './gestion-responsable/gestion-responsable.component';
 import { UpdateEmployeeComponent } from './update-employee/update-employee.component';
 import { UpdateFichMatEmbComponent } from './update-fich-mat-emb/update-fich-mat-emb.component';
 
@@ -20,7 +22,9 @@ const routes: Routes = [
   { path: 'fichesRec', component: FicheReceptionComponent },
   { path: 'bonEntrees', component: FicheBonEntreeComponent },
   { path: 'updateFicheEmb/:id', component: UpdateFichMatEmbComponent },
-  { path: '', redirectTo: 'fichesCond', pathMatch: 'full' }
+  { path: 'addFerme/:id', component: GestionFermeComponent },
+  { path: 'responsables', component: GestionResponsableComponent },
+  { path: '', redirectTo: 'responsables', pathMatch: 'full' }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

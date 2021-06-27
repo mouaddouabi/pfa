@@ -8,7 +8,7 @@ import { Ficherec } from './ficherec';
 })
 export class FicheReceptionService {
 
-  private url = 'http://localhost:8080/fichesReception/fichereception';
+  private url = 'http://localhost:8080/fichereception';
   constructor(private http:HttpClient) { }
 
   getFichesRec():Observable<any>{
@@ -26,5 +26,7 @@ export class FicheReceptionService {
   deleteFicheRec(id:number):Observable<any>{
     return this.http.delete(`${this.url}/${id}`);
   }
-  
+  findFicheByLot(id:number):Observable<any>{
+    return this.http.get(`${this.url}/lot/${id}`);
+  }
 }

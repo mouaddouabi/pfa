@@ -1,71 +1,69 @@
 
 <div class="card" style="width: 100%;">
     <div class="card-body">
-      <table class="mytable table table-striped example" style="width:100%">
-      <thead>
-        <tr>
-          <th scope="col">Code Fournisseur</th>
-          <th scope="col">Transporteur </th>
-          <th scope="col">N° lot approvisionnement</th>
-          <th scope="col">Region</th>
-          <th scope="col">Variété</th>
-          <th scope="col">Date de récolte</th>
-          <th scope="col">Quantité livrée</th>
-          <th scope="col">Date de livraison</th>
-          <th scope="col"></th>
-
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let fiche of fichesRec | async">
-          <td>{{fiche.fournisseur.codeFr}}</td>
-          <td>{{fiche.lot.transport.nomTranspt}}</td>
-          <td>{{fiche.lot.numLotAppro}}</td>
-          <td>{{fiche.fournisseur.region}}</td>
-          <td>{{fiche.lot.variete}}</td>
-          <td>{{fiche.lot.dateRecolte}}</td>
-          <td>{{fiche.qteLivree}}</td>
-          <td>{{fiche.lot.dateLivraison}}</td>
-          <td>
-            <button (click)="deleteFicheRec(fiche.codeRecep)" class="btn btn-danger">Delete</button>
-            <button (click)="updateFicheRec(fiche.codeRecep)" class="btn btn-info float-right" style="margin-left: 10px">Details</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  </div>
+      <table class="mytable table table-striped" style="width:100%">
+        <thead>
+          <tr>
+            <th scope="col">Code Fournisseur</th>
+            <th scope="col">Transporteur </th>
+            <th scope="col">Region</th>
+            <th scope="col">Variété</th>
+            <th scope="col">Quantité livrée</th>
+            <th scope="col">Date de livraison</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let fiche of fichesRec">
+            <td>{{fiche.fournisseur.codeFr}}</td>
+            <td>{{fiche.lot.transport.nomTranspt}}</td>
+            <td>{{fiche.lot.parcelle.ferme.region}}</td>
+            <td>{{fiche.lot.variete}}</td>
+            <td>{{fiche.qteLivree}}</td>
+            <td>{{fiche.lot.dateLivraison}}</td>
+            <td >
+              <button (click)="deleteFicheRec(fiche.codeRecep)" class="btn btn-danger">Delete</button>
+              <button (click)="updateFicheRec(fiche.codeRecep)" class="btn btn-info float-right" style="margin-left: 10px">Details</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div>
   <hr>
   <div class="card">
     <div class="card-body">
     <div class="container">
-      <h4>create Fournisseur</h4>
+      <h4></h4>
       <form (ngSubmit)="onSubmit()">
           <div class="form-group">
-            <label for="selectf">Fournisseur</label>
-            <select name="selectmodel" [(ngModel)]="fournisseur" class="custom-select" id="selectf">
-              <option *ngFor="let four of fournisseurs | async" [ngValue]="four">{{four.nom}}</option>
-          </select>
+            <label for="selectf">Fournisseur <span *ngIf="!isAdd" style="font-weight: bold;">:{{ficheRec.fournisseur.nom}}</span></label>
+            <select name="selectmodel" [(ngModel)]="ficheRec.fournisseur" class="custom-select" id="selectf">
+              <option *ngFor="let four of fournisseurs" [ngValue]="four">{{four.nom}}</option>
+            </select>
           </div>
+           <div class="form-group">
+            <label for="selectmodel2">Ferme <span *ngIf="!isAdd" style="font-weight: bold;">:{{ficheRec.lot.parcelle.ferme.region}}</span></label>
+            <select name="selectmodel2" [(ngModel)]="ficheRec.lot.parcelle.ferme" class="custom-select" id="selectmodel2">
+              <option *ngFor="let ferm of ficheRec.fournisseur.ferme" selected="selected"  [ngValue]="ferm">{{ferm.region}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="selectmodel3">Variété</label>
+            <select class="custom-select" id="selectmodel3" required [(ngModel)]="ficheRec.lot.variete" name="selectmodel3">
+              <option *ngFor="let variete of varietes" [ngValue]="variete">{{variete}}</option>   
+            </select>
+          </div>
+          {{ficheRec.lot.variete}}
           <div class="form-group">
             <label for="Transporteur">Transporteur </label>
             <input type="text" class="form-control" id="Transporteur" required [(ngModel)]="ficheRec.lot.transport.nomTranspt" name="Transporteur">
           </div>
           <div class="form-group">
-            <label for="numLotAppro">N° du lot d’approvisionnement</label>
-            <input type="text" class="form-control" id="numLotAppro" required [(ngModel)]="ficheRec.lot.numLotAppro" name="numLotAppro">
+            <label for="camion">Matricule Camion </label>
+            <input type="text" class="form-control" id="camion" required [(ngModel)]="ficheRec.lot.transport.matricule" name="camion">
           </div>
           
-          <div class="form-group">
-            <label for="Region">Region</label>
-            <input type="text" class="form-control" id="Region" disabled required [(ngModel)]="ficheRec.fournisseur.region" value="{{fournisseur.region}}" name="Region">
-          </div>
-
-          <div class="form-group">
-            <label for="Variété">Variété</label>
-            <input type="text" class="form-control" id="Variété" required [(ngModel)]="ficheRec.lot.variete" name="Variété">
-          </div>
-
           <div class="form-group">
             <label for="Date_de_recolte">Date de récolte</label>
             <input type="date" class="form-control" id="Date_de_recolte" required [(ngModel)]="ficheRec.lot.dateRecolte" name="Date_de_recolte">
@@ -73,11 +71,12 @@
 
           <div class="form-group">
             <label for="Quantite_livree">Quantité livrée</label>
-            <input type="text" class="form-control" id="Quantite_livree" required [(ngModel)]="ficheRec.qteLivree" name="Quantite_livree">
+            <input type="number" class="form-control" id="Quantite_livree" required [(ngModel)]="ficheRec.qteLivree" name="Quantite_livree">
           </div>
+
           <div class="form-group">
             <label for="Date_de_livraison">Date de livraison</label>
-            <input type="date" class="form-control" id="Date_de_livraison" required [(ngModel)]="ficheRec.lot.dateLivraison" name="Date_de_livraison">
+            <input type="date" class="form-control" min="{{ficheRec.lot.dateRecolte}" id="Date_de_livraison" required [(ngModel)]="ficheRec.lot.dateLivraison" name="Date_de_livraison">
           </div>
           
           <div class="form-group">
@@ -237,12 +236,16 @@
             <input type="text" class="form-control" id="humidite_date" [(ngModel)]="ficheRec.humiditeDattes" name="humidite_date">
           </div>
           <div class="form-group">
-            <label for="Responsable_approvisionnement">Responsable d'approvisionnement</label>
-            <input type="text" class="form-control" id="Responsable_approvisionnement" required [(ngModel)]="ficheRec.responsable[0].nom" name="Responsable_approvisionnement">
+            <label for="Responsable_approvisionnement">Responsable d'approvisionnement <span *ngIf="!isAdd" style="font-weight: bold;">:{{ficheRec.responsable[0].nom}}</span></label>
+            <select name="Responsable_approvisionnement" [(ngModel)]="ficheRec.responsable[0]" class="custom-select" id="Responsable_approvisionnement">
+              <option *ngFor="let respo of responsablesAppro" [ngValue]="respo">{{respo.nom}}</option>
+            </select>  
           </div>
           <div class="form-group">
-            <label for="Responsable_qualite">Responsable qualité </label>
-            <input type="text" class="form-control" id="Responsable_qualite" required [(ngModel)]="ficheRec.responsable[1].nom" name="Responsable_qualite">
+            <label for="Responsable_qualite">Responsable qualité <span *ngIf="!isAdd" style="font-weight: bold;">:{{ficheRec.responsable[1].nom}}</span></label>
+            <select name="Responsable_qualite" [(ngModel)]="ficheRec.responsable[1]" class="custom-select" id="Responsable_qualite">
+              <option *ngFor="let respo of responsablesqualite" [ngValue]="respo">{{respo.nom}}</option>
+            </select>
           </div>
           <button *ngIf="isAdd" type="submit" class="btn btn-primary">Submit</button>
           <button *ngIf="!isAdd" type="submit" class="btn btn-success">Submit</button>

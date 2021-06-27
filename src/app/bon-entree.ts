@@ -14,6 +14,6 @@ export class BonEntree {
     constructor(){
         this.fournisseur = new Fournisseur();
         this.lot= new Lot();
-        this.responsable = new Responsable('responsable approvisionnement');
+        this.responsable = new Responsable();
     }
 }
