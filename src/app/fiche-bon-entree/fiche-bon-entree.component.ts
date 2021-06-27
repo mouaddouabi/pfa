@@ -19,7 +19,6 @@ import { ResponsableService } from '../responsable.service';
 })
 export class FicheBonEntreeComponent implements OnInit {
 
-  fichesBonEntree!: Observable<BonEntree[]>;
   fournisseur:Fournisseur = new Fournisseur();
   lots!:Lot[] ;
   lott = new Lot();
@@ -30,6 +29,7 @@ export class FicheBonEntreeComponent implements OnInit {
   idUpdate = 0;
   isAdd = true;
   responsablesAppro!:Responsable[];
+  fichesBonEntree!: BonEntree[];
 
   constructor(private bonEntreeService:BonEntreeService,private route:Router,
     private fournisseurService:FournisseurService,private lotService:LotService,
@@ -40,7 +40,12 @@ export class FicheBonEntreeComponent implements OnInit {
  
   reloadData() {    
     this.fournisseurs = this.fournisseurService.getFournisseurs(); 
-    this.fichesBonEntree = this.bonEntreeService.getBonEntreesList();
+    this.bonEntreeService.getBonEntreesList().subscribe(
+      data=>{
+        console.log(data);
+        this.fichesBonEntree = data;
+      }
+    );
     this.bonEntree = new BonEntree();
     this.lotService.getLotsFR().subscribe(
       data=>{

@@ -20,7 +20,6 @@ import { ResponsableService } from '../responsable.service';
 export class FicheReceptionComponent implements OnInit {
   fournisseurs!: Fournisseur[];
   fournisseur:Fournisseur = new Fournisseur();
-  fichesRec!:Ficherec[];
   respo :Responsable = new Responsable();
   respo2 :Responsable= new Responsable();
   firstname:any;
@@ -35,6 +34,7 @@ export class FicheReceptionComponent implements OnInit {
   isCorps_etrangers = false;
   public ficheRec:Ficherec = new Ficherec();
   ferme: Ferme = new Ferme();
+  fichesRec!: Ficherec[];
   constructor(private ficherecservice: FicheReceptionService,private router: Router,private route:ActivatedRoute,
     private fournisseurService:FournisseurService,private responsableService:ResponsableService) {}
     ngOnInit() {
@@ -42,20 +42,19 @@ export class FicheReceptionComponent implements OnInit {
     }
    
     reloadData() {     
+      this.ficherecservice.getFichesRec().subscribe(
+        data=>{
+          console.log(data);
+          this.fichesRec =data;
+        }
+      )
+      
       this.fournisseurService.getFournisseurs().subscribe(
         data=>{
           console.log(data);
           this.fournisseurs = data as Fournisseur[];
         }
       )
-       this.ficherecservice.getFichesRec().subscribe(
-        data=>{
-          console.log(data),
-          this.fichesRec = data as Ficherec[];
-        }
-      );
-      console.log(this.fichesRec);
-      
       this.ficheRec = new Ficherec();
       this.responsableService.getResponsablesByType("Responsable qualité").subscribe(
         data =>{

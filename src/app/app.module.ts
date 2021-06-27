@@ -15,6 +15,10 @@ import { UpdateFichMatEmbComponent } from './update-fich-mat-emb/update-fich-mat
 import { FicheConditionnementComponent } from './fiche-conditionnement/fiche-conditionnement.component';
 import { GestionFermeComponent } from './gestion-ferme/gestion-ferme.component';
 import { GestionResponsableComponent } from './gestion-responsable/gestion-responsable.component';
+import { MaterielEmballageComponent } from './materiel-emballage/materiel-emballage.component';
+import { GestEmballageComponent } from './gest-emballage/gest-emballage.component';
+import { FichierCondComponent } from './fichier-cond/fichier-cond.component';
+import { UnitesComponent } from './unites/unites.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +34,10 @@ import { GestionResponsableComponent } from './gestion-responsable/gestion-respo
     FicheConditionnementComponent,
     GestionFermeComponent,
     GestionResponsableComponent,
+    MaterielEmballageComponent,
+    GestEmballageComponent,
+    FichierCondComponent,
+    UnitesComponent,
   ],
   imports: [
     BrowserModule,

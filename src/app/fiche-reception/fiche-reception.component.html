@@ -4,7 +4,7 @@
       <table class="mytable table table-striped" style="width:100%">
         <thead>
           <tr>
-            <th scope="col">Code Fournisseur</th>
+            <th scope="col">Fournisseur</th>
             <th scope="col">Transporteur </th>
             <th scope="col">Region</th>
             <th scope="col">Variété</th>
@@ -15,7 +15,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let fiche of fichesRec">
-            <td>{{fiche.fournisseur.codeFr}}</td>
+            <td>{{fiche.fournisseur.nom}}</td>
             <td>{{fiche.lot.transport.nomTranspt}}</td>
             <td>{{fiche.lot.parcelle.ferme.region}}</td>
             <td>{{fiche.lot.variete}}</td>
@@ -54,7 +54,6 @@
               <option *ngFor="let variete of varietes" [ngValue]="variete">{{variete}}</option>   
             </select>
           </div>
-          {{ficheRec.lot.variete}}
           <div class="form-group">
             <label for="Transporteur">Transporteur </label>
             <input type="text" class="form-control" id="Transporteur" required [(ngModel)]="ficheRec.lot.transport.nomTranspt" name="Transporteur">

@@ -1,6 +1,7 @@
 $(document).ready(function(){
     $(".mytable").DataTable();
     $("select[name*='DataTables_Table_0_length']").css({"width":"50px"});
+    console.log("datatable");
 });
 
 function corps_etr(att){

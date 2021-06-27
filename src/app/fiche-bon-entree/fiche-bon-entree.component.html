@@ -6,15 +6,15 @@
           <th class="col-2" scope="col">Fournisseur</th>
           <th class="col-1" scope="col">N° lot approvisionnement</th>
           <th class="col-1" scope="col">Total</th>
-          <th class="col-2" scope="col">Variété</th>
+          <th class="col-1" scope="col">Variété</th>
           <th class="col-2" scope="col">Maturité des dattes</th>
           <th scope="col">Etat sanitaire </th>
           <th class="col-1" scope="col">Decision</th>
-          <th class="col-2" scope="col"></th>
+          <th class="col-3" scope="col"></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let fiche of fichesBonEntree | async">
+        <tr *ngFor="let fiche of fichesBonEntree">
           <td>{{fiche.fournisseur.nom}}</td>
           <td>{{fiche.lot.numLotAppro}}</td>
           <td>{{fiche.total}}</td>
@@ -134,13 +134,13 @@
                         <div class="form-group" style="margin-top: 12px;">
                             <div class="form-check form-check-inline">
                                 <label class="form-check-label">
-                                <input type="radio" class="form-check-input mt-1 ml-2" name="Decision" value="Acceptation" [(ngModel)]="bonEntree.decision">
+                                <input type="radio" class="form-check-input mt-1 ml-2" name="Decision" required="required" value="Acceptation" [(ngModel)]="bonEntree.decision">
                                 Acceptation
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <label class="form-check-label">
-                                <input type="radio" class="form-check-input mt-1" name="Decision" value="Rejet" [(ngModel)]="bonEntree.decision">
+                                <input type="radio" class="form-check-input mt-1" name="Decision" required="required" value="Rejet" [(ngModel)]="bonEntree.decision">
                                 Rejet 
                                 </label>
                             </div>

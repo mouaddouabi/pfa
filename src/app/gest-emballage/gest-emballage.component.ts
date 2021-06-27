@@ -1,0 +1,86 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Emballage } from '../emballage';
+import { EmballageService } from '../emballage.service';
+import { FicheMaterieEmb } from '../fiche-materie-emb';
+import { FicheMaterieEmbService } from '../fiche-materie-emb.service';
+
+@Component({
+  selector: 'app-gest-emballage',
+  templateUrl: './gest-emballage.component.html',
+  styleUrls: ['./gest-emballage.component.css']
+})
+export class GestEmballageComponent implements OnInit {
+
+  id!:number;
+  ficheMat:FicheMaterieEmb = new FicheMaterieEmb();
+  emballages!:Observable<Emballage[]>;
+  emballage = new Emballage();
+  idUpdate = 0;
+  isAdd = true;
+  constructor(private route: Router,private router:ActivatedRoute,private emballageService:EmballageService,private ficheService:FicheMaterieEmbService) { }
+
+  ngOnInit(): void {
+    this.reloadData();
+  }
+  
+  reloadData() {
+    this.id = this.router.snapshot.params['id'];
+    this.ficheService.getFicheMatEmb(this.id).subscribe(
+      data=>{
+        console.log(data),
+        this.ficheMat=data;
+        this.emballage= new Emballage();
+      }
+    );
+    this.emballageService.getEmballagesFiche(this.id).subscribe(
+      data=>{
+        console.log(data);
+        this.emballages = data;
+      }
+    )
+  }
+  deleteEmballage(id:number){
+    this.emballageService.deleteEmballage(id).subscribe(data =>{ 
+      console.log(data)
+      this.route.navigate(['gestEmballages/'+this.id]);
+      this.reloadData();
+    },error => console.log(error)
+    );
+  }
+  updateEmballage(id:number){
+    this.idUpdate=id;
+    console.log(id);
+    this.emballageService.getEmballage(id).subscribe(data =>{ 
+      console.log(data),
+      this.emballage=new Emballage(),
+      this.emballage=data;
+    },error => console.log(error));
+    this.isAdd=false;
+  }
+  onSubmit(){
+    console.log(this.isAdd)
+    this.emballage.ficheMaterieEmb = this.ficheMat;
+    if(this.isAdd){
+      console.log(this.emballage);
+      this.emballageService.createEmballage(this.emballage).subscribe(data => {
+        console.log(data);
+        this.ficheMat = new FicheMaterieEmb();
+        this.route.navigate( ['gestEmballages/'+this.id]);
+        this.reloadData();
+      },
+      error => console.log(error));
+    }else{
+      this.emballageService.updateEmballage(this.emballage,this.emballage.codeEmb).subscribe(
+        data => {
+          console.log(data)
+          this.route.navigate( ['gestEmballages/'+this.id]);
+          this.reloadData();
+        },error => console.log(error)
+      );
+      this.isAdd=true;
+      this.idUpdate=0;
+    }
+  }
+}

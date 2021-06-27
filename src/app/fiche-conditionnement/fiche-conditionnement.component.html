@@ -14,7 +14,7 @@
       <tbody>
         <tr *ngFor="let fiche of fichesTab">
             <td >{{fiche.dateCondi}}</td>
-            <td >{{fiche.lot.codeLotAppro}}</td>
+            <td >{{fiche.lot.codeLotProduction}}</td>
             <td >{{fiche.emballage.numLotEmb}}</td>
             <td>{{fiche.qteDateCondi}}</td>
             <td>{{fiche.humiditeDateCondi}}</td>
@@ -41,7 +41,7 @@
                 <div class="form-group col-6">
                     <label for="selectf">Numéro Lot de production</label>
                     <select name="selectmodel" [(ngModel)]="ficheCond.lot" class="custom-select" id="selectf">
-                      <option *ngFor="let four of lots" [ngValue]="four">{{four.codeLotAppro}}</option>
+                      <option *ngFor="let four of lots" [ngValue]="four">{{four.codeLotProduction}}</option>
                   </select>
                 </div>
                 <div class="form-group col-6">

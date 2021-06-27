@@ -1,0 +1,90 @@
+<div class="card">
+    <div class="card-body">
+      <table class="mytable table table-striped example" style="width:100%">
+      <thead>
+        <tr>
+          <th scope="col">Fournisseur</th>
+          <th scope="col">Volume unité</th>
+          <th scope="col">Opérateur</th>
+          <th scope="col">Date de conditionnement</th>
+          <th scope="col">Type Emballage</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let emb of ficheMat.emballages">
+            <td >{{emb.frEmb}}</td>
+            <td >{{emb.volumeUnite}}</td>
+            <td >{{emb.operateur.nom}}</td>
+            <td >{{emb.dateCond}}</td>
+            <td >{{emb.typeEmb}}</td> 
+            <td >
+                <button (click)="deleteEmballage(emb.codeEmb)" class="btn btn-danger">Delete</button>
+                <button (click)="updateEmballage(emb.codeEmb)" class="btn btn-info" style="margin-left: 10px">Details</button>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<br>
+<div class="card">
+    <div class="card-body">
+        <div class="container">
+            <h4>Ajouter un Nouveau Emballage</h4>
+            <br>
+            <form (ngSubmit)="onSubmit()">    
+                <div class="container">
+                    <div class="row">
+                        <div class="form-group col-4">
+                            <label for="Fournisseur">Fournisseur</label>
+                            <input type="text" class="form-control" id="Fournisseur" required [(ngModel)]="emballage.frEmb" name="Fournisseur">
+                        </div>
+                        <div class="form-group col-4">
+                            <label for="CodeFr">Code fournisseur</label>
+                            <input type="number" class="form-control" id="CodeFr" required [(ngModel)]="emballage.codeFrEmb" name="CodeFr">
+                        </div>
+                        <div class="form-group col-4">
+                            <label for="numLotEmb">N° lot emballage</label>
+                            <input type="number" class="form-control" id="numLotEmb" required [(ngModel)]="emballage.numLotEmb" name="numLotEmb">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-4">
+                            <label for="Volume_unite">Volume unité</label>
+                            <input type="number" class="form-control" id="Volume_unite" required [(ngModel)]="emballage.volumeUnite" name="Volume_unite">
+                        </div>
+                        <div class="form-group col-4">
+                            <label for="condStock">Conditions de stockage</label>
+                            <input type="text" class="form-control" id="condStock" required [(ngModel)]="emballage.condStockage" name="condStock">
+                        </div>
+                        <div class="form-group col-4">
+                            <label for="dateCond">Date de conditionnement</label>
+                            <input type="date" class="form-control" id="dateCond" required [(ngModel)]="emballage.dateCond" name="dateCond">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-4">
+                            <label for="Operateur">Opérateur</label>
+                            <input type="text" class="form-control" id="Operateur" required [(ngModel)]="emballage.operateur.nom" name="Operateur">
+                        </div>
+                        <div class="form-group col-4">
+                            <label for="lavSechEmb">Lavage et séchage des emballages</label>
+                            <input type="text" class="form-control" id="lavSechEmb" required [(ngModel)]="emballage.lavageSechageEmb" name="lavageSechageEmb">
+                        </div>
+                        <div class="form-group col-4">
+                            <label for="actionCorre">Actions correctives</label>
+                            <input type="text" class="form-control" id="actionCorre" required [(ngModel)]="emballage.actionsCor" name="actionCorre">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Type">Type Emballage</label>
+                        <input type="text" class="form-control" id="Type" required [(ngModel)]="emballage.typeEmb" name="Type">
+                    </div>
+                    <button *ngIf="isAdd" type="submit" class="btn btn-primary">Submit</button>
+                    <button *ngIf="!isAdd" type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

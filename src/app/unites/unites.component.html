@@ -1,0 +1,71 @@
+<div class="card">
+    <div class="card-body">
+      <table class="mytable table table-striped example" style="width:100%">
+      <thead>
+        <tr>
+          <th scope="col">Numéro de série des unités initiales</th>
+          <th scope="col">Volume unité</th>
+          <th scope="col">Nombre d’unités conditionnées</th>
+          <th scope="col">Numéro de colis</th>
+          <th scope="col">Nombre de barquettes par colis</th>
+          <th scope="col">Nombre de colis</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let unit of unites">
+            <td >{{unit.numSerieUnitesInit}}</td>
+            <td >{{unit.volumeUnite}}</td>
+            <td >{{unit.nbreUnitesCondi}}</td>
+            <td >{{unit.numColis}}</td>
+            <td >{{unit.nbreBraquettesParColis}}</td>
+            <td >{{unit.nbreColis}}</td>
+            <td >
+                <button (click)="deleteUnites(unit.numSerieUnitesInit)" class="btn btn-danger">Delete</button>
+                <button (click)="updateUnites(unit.numSerieUnitesInit)" class="btn btn-info" style="margin-left: 10px">Details</button>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<br>
+<div class="card">
+    <div class="card-body">
+        <div class="container">
+        <h4>Ajouter un Nouveau Fiche d'Emballage</h4>
+        <br>
+        <form (ngSubmit)="onSubmit()">
+            <div class="container">
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label for="volumeUnite">Volume unité</label>
+                        <input type="number" class="form-control" id="volumeUnite" required [(ngModel)]="unite.volumeUnite" name="volumeUnite">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="nbreUnitesCondi">Nombre d’unités conditionnées</label>
+                        <input type="number" class="form-control" id="nbreUnitesCondi" required [(ngModel)]="unite.nbreUnitesCondi" name="nbreUnitesCondi">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="numColis">Numéro de colis</label>
+                        <input type="number" class="form-control" id="numColis" required [(ngModel)]="unite.numColis" name="numColis">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="nbreBraquettesParColis">Nombre de barquettes par colis</label>
+                        <input type="number" class="form-control" id="nbreBraquettesParColis" required [(ngModel)]="unite.nbreBraquettesParColis" name="nbreBraquettesParColis">
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="nbreColis">Nombre de colis</label>
+                        <input type="number" class="form-control" id="nbreColis" required [(ngModel)]="unite.nbreColis" name="nbreColis">
+                    </div>
+                </div>
+                <button *ngIf="isAdd" type="submit" class="btn btn-primary">Submit</button>
+                <button *ngIf="!isAdd" type="submit" class="btn btn-success">Submit</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+            

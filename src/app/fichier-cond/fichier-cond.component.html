@@ -1,0 +1,77 @@
+<div class="card" style="width: 100%;">
+    <div class="card-body">
+      <table class="mytable table table-striped example" style="width:100%">
+      <thead>
+        <tr>
+          <th scope="col">Date de conditionnement</th>
+          <th scope="col">N Lot de production</th>
+          <th scope="col">N Lot d’emballage</th>
+          <th scope="col">Quantité dattes conditionnée</th>
+          <th scope="col">Humidité des dattes conditionnées</th>
+          <th class="col-2"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fiche of fichesTab">
+            <td >{{fiche.dateCondi}}</td>
+            <td >{{fiche.lot.codeLotProduction}}</td>
+            <td >{{fiche.emballage.numLotEmb}}</td>
+            <td>{{fiche.qteDateCondi}}</td>
+            <td>{{fiche.humiditeDateCondi}}</td>
+            <td >
+                <button (click)="deleteFicheCond(fiche.codeCondi)" class="btn btn-danger">Delete</button>
+                <button (click)="updateFicheCond(fiche.codeCondi)" class="btn btn-info" style="margin-left: 10px">Details</button>
+                <button (click)="Unites(fiche.codeCondi)" class="btn btn-info" style="margin-left: 10px">Unites</button>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<br>
+<div class="card">
+    <div class="card-body">
+        <div class="container">
+        <h4>Ajouter un Nouveau Fiche de conditionnement</h4>
+        <br>
+        <form (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="date">Date de conditionnement</label>
+                <input type="date" class="form-control" id="date" required [(ngModel)]="ficheCond.dateCondi" name="date">
+            </div>
+            <div class="row">
+                <div class="form-group col-6">
+                    <label for="selectf">Numéro Lot de production</label>
+                    <select name="selectmodel" [(ngModel)]="ficheCond.lot" class="custom-select" id="selectf">
+                      <option *ngFor="let four of lots" [ngValue]="four">{{four.codeLotProduction}}</option>
+                  </select>
+                </div>
+                <div class="form-group col-6">
+                    <label for="selectf1">Numéro du lot d’emballage</label>
+                    <select name="selectmodel" [(ngModel)]="ficheCond.emballage" class="custom-select" id="selectf1">
+                      <option *ngFor="let emb of emballages" [ngValue]="emb">{{emb.numLotEmb}}</option>
+                  </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-6">
+                    <label for="quCond">Quantité dattes conditionnée</label>
+                    <input type="number" class="form-control" id="quCond" required [(ngModel)]="ficheCond.qteDateCondi" name="quCond">
+                </div>
+                <div class="form-group col-6">
+                    <label for="humiditeDateCondi">Humidité des dattes conditionnée</label>
+                    <input type="number" class="form-control" id="humiditeDateCondi" required [(ngModel)]="ficheCond.humiditeDateCondi" name="humiditeDateCondi">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Responsable_qualite">Responsable qualité <span *ngIf="!isAdd" style="font-weight: bold;">:{{ficheCond.responsable.nom}}</span></label>
+                <select name="Responsable_qualite" [(ngModel)]="ficheCond.responsable" class="custom-select" id="Responsable_qualite">
+                  <option *ngFor="let respo of responsablesqualite" [ngValue]="respo">{{respo.nom}}</option>
+                </select>
+            </div>
+            <button *ngIf="isAdd" type="submit" class="btn btn-primary">Submit</button>
+            <button *ngIf="!isAdd" type="submit" class="btn btn-success">Submit</button>
+        </form>
+        </div>
+    </div>
+</div>

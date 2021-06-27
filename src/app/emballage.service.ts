@@ -26,8 +26,10 @@ export class EmballageService {
   updateEmballage(emp:Emballage,id:number):Observable<Object>{
     return this.http.put(`${this.url}/${id}`,emp);
   }
-  deleteEmployee(id:number):Observable<any>{
+  deleteEmballage(id:number):Observable<any>{
     return this.http.delete(`${this.url}/${id}`);
   }
-
+  getEmballagesFiche(id:number):Observable<any>{
+    return this.http.get(`${this.url}/fiche/${id}`);
+  }
 }

@@ -11,7 +11,7 @@ import { ResponsableService } from '../responsable.service';
 })
 export class GestionResponsableComponent implements OnInit {
 
-  responsables!: Observable<Responsable[]>;
+  responsables!: Responsable[];
   fonctions = ["Responsable qualité","Responsable approvisionnement","Responsable de production et qualité"];
   firstname:any;
   id:number=0;
@@ -26,7 +26,12 @@ export class GestionResponsableComponent implements OnInit {
     }
    
     reloadData() {     
-      this.responsables = this.responsableservice.getResponsables();
+      this.responsableservice.getResponsables().subscribe(
+        data=>{
+          console.log(data);
+          this.responsables = data as Responsable[];
+        }
+      )
       this.responsable = new Responsable();
     }
     deleteResponsable(id:number){

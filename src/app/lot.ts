@@ -19,7 +19,7 @@ export class Lot {
     aspectSanitaire!:string;
     numLotAppro!:number;
     dateRecolte!:Date;
-    codeLotAppro!:number;
+    codeLotProduction!:number;
     parcelle!:Parcelle;
     transport!:Transport;
     fichefumegation!:Fichefumegation;

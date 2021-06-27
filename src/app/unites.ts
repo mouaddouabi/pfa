@@ -8,5 +8,7 @@ numSerieUnitesInit!:number;
    nbreBraquettesParColis!:number;
    nbreColis!:number;
    ficheConditionnement!:FicheConditionnement;
-   constructor(){}
+   constructor(){
+      this.ficheConditionnement = new FicheConditionnement();
+   }
 }

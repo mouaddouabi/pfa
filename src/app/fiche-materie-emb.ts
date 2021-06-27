@@ -8,7 +8,7 @@ export class FicheMaterieEmb {
     emballages!:Emballage[];
     responsable!:Responsable;
     constructor(){
-        this.emballages = new Array<Emballage>(4);
+        this.emballages = new Array<Emballage>();
         this.responsable=new Responsable();
     }
 }

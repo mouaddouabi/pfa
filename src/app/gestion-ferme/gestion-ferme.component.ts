@@ -58,9 +58,9 @@ export class GestionFermeComponent implements OnInit {
     this.isAdd=false;
   }
   onSubmit(){
-    console.log(this.isAdd)
+    console.log(this.isAdd);
+    this.ferme.fournisseur = this.fournisseur;
     if(this.isAdd){
-      this.ferme.fournisseur = this.fournisseur;
       console.log(this.ferme);
       this.fermeService.createFerme(this.ferme).subscribe(data => {
         console.log(data);
