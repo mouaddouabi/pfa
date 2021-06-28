@@ -10,6 +10,7 @@ import { FichierCondComponent } from './fichier-cond/fichier-cond.component';
 import { GestEmballageComponent } from './gest-emballage/gest-emballage.component';
 import { GestFournisseurComponent } from './gest-fournisseur/gest-fournisseur.component';
 import { GestionFermeComponent } from './gestion-ferme/gestion-ferme.component';
+import { GestionOperateursComponent } from './gestion-operateurs/gestion-operateurs.component';
 import { GestionResponsableComponent } from './gestion-responsable/gestion-responsable.component';
 import { MaterielEmballageComponent } from './materiel-emballage/materiel-emballage.component';
 import { UnitesComponent } from './unites/unites.component';
@@ -29,10 +30,11 @@ const routes: Routes = [
   { path: 'addFerme/:id', component: GestionFermeComponent },
   { path: 'gestEmballages/:id', component: GestEmballageComponent },
   { path: 'unites/:id', component: UnitesComponent },
+  { path: 'operateurs', component: GestionOperateursComponent },
   { path: 'responsables', component: GestionResponsableComponent },
   { path: 'fichesConditionnement', component: FichierCondComponent },
   { path: 'matsemb', component: MaterielEmballageComponent },
-  { path: '', redirectTo: 'fichesConditionnement', pathMatch: 'full' }
+  { path: '', redirectTo: 'operateurs', pathMatch: 'full' }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

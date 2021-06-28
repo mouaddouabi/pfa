@@ -31,14 +31,7 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js",
-              "https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js",
-              "https://code.jquery.com/jquery-3.5.1.js",
-              "https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js",
-              "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js",
-              "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js",
               "src/assets/js/test.js"
             ]
           },

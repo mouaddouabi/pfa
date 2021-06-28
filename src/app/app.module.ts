@@ -19,6 +19,8 @@ import { MaterielEmballageComponent } from './materiel-emballage/materiel-emball
 import { GestEmballageComponent } from './gest-emballage/gest-emballage.component';
 import { FichierCondComponent } from './fichier-cond/fichier-cond.component';
 import { UnitesComponent } from './unites/unites.component';
+import { GestionOperateursComponent } from './gestion-operateurs/gestion-operateurs.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +40,7 @@ import { UnitesComponent } from './unites/unites.component';
     GestEmballageComponent,
     FichierCondComponent,
     UnitesComponent,
+    GestionOperateursComponent,
   ],
   imports: [
     BrowserModule,
