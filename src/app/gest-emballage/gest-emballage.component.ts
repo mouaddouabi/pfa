@@ -5,6 +5,8 @@ import { Emballage } from '../emballage';
 import { EmballageService } from '../emballage.service';
 import { FicheMaterieEmb } from '../fiche-materie-emb';
 import { FicheMaterieEmbService } from '../fiche-materie-emb.service';
+import { Operateurs } from '../operateurs';
+import { OperateursService } from '../operateurs.service';
 
 @Component({
   selector: 'app-gest-emballage',
@@ -19,7 +21,8 @@ export class GestEmballageComponent implements OnInit {
   emballage = new Emballage();
   idUpdate = 0;
   isAdd = true;
-  constructor(private route: Router,private router:ActivatedRoute,private emballageService:EmballageService,private ficheService:FicheMaterieEmbService) { }
+  operateurs!:Operateurs[];
+  constructor(private route: Router,private router:ActivatedRoute,private emballageService:EmballageService,private ficheService:FicheMaterieEmbService,private operateurService:OperateursService) { }
 
   ngOnInit(): void {
     this.reloadData();
@@ -38,6 +41,12 @@ export class GestEmballageComponent implements OnInit {
       data=>{
         console.log(data);
         this.emballages = data;
+      }
+    )
+    this.operateurService.getOperateursByType("Emballage").subscribe(
+      data=>{
+        console.log(data);
+        this.operateurs = data as Operateurs[];
       }
     )
   }
